@@ -9,3 +9,12 @@ WHERE o.customerId IS NULL;
 SELECT name AS Customers
 FROM Customers
 WHERE id NOT IN (SELECT customerId FROM Orders);
+
+-- solution using NOT EXISTS
+SELECT name AS Customers
+FROM Customers c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Orders o
+    WHERE c.id = o.customerId
+);
